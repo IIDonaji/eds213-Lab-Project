@@ -1,3 +1,6 @@
+# raw data ignored
+data/raw/
+
 # History files
 .Rhistory
 .Rapp.history
