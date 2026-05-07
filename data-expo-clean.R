@@ -1,11 +1,10 @@
-# --- Exploring & Cleaning data ---
-# --- Analytical question:---
-
-# Which sites have the highest total invertebrate biomass, and does that correspond to higher shorebird abundance?
+#--- Exploring & Cleaning data ---
+# Before building a database its important to explore, understand the data and make any changes that make cause problems later. 
 
 # --- Load Library's ---
 library(tidyverse)
 library(here)
+library(janitor)
 
 # --- Load raw data ---
 invert <- read_csv(here("data","raw","invertebrates.csv"))
@@ -16,11 +15,11 @@ shorebird <- read_csv(here("data","raw","shorebirds.csv"))
 glimpse(invert)
 glimpse(shorebird)
 
-# Checking columns can be matched
+# Check columns combatability
 colnames(invert)
 colnames(shorebird)
 
-# Missing values
+# Check for missing values
 colSums(is.na(invert))
 colSums(is.na(shorebird))
 
@@ -32,7 +31,7 @@ setdiff(shorebird$site, invert$site) # in shorebird but not invert
 
 # Duplicates
 invert |>
-  janitor::get_dupes(site, transect, genus_species)
+    get_dupes(site, transect, genus_species)
 
 # Numeric column sanity check
 summary(invert$abundance)
@@ -46,7 +45,7 @@ unique(shorebird$survey)
 table(is.na(shorebird$sanderling)) # spot check one species
 
 # --- Clean Invertebrates ---
-# Fix site name mismatch — standardize to the shorter version
+# Fix site name mismatch — standardize to the actual version name
 invert_clean <- invert |>
   mutate(
     site = str_replace(site, "Santa Claus ", "Santa Claus Lane"),
@@ -65,6 +64,6 @@ sites <- tibble(
   site = sort(unique(c(invert_clean$site, shorebird_clean$site)))
 )
 
-# # Convert clean data to csv
+# Convert clean data to csv
 write_csv(invert_clean, file.path(here("data", "processed", "invertebrates_clean.csv")))
 write_csv(shorebird_clean, file.path(here("data", "processed", "shorebirds_clean.csv")))
