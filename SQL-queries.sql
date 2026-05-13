@@ -48,3 +48,13 @@ JOIN (
     GROUP BY site
 ) b ON i.site = b.site
 ORDER BY total_biomass DESC;
+
+-- Initial query -- produced inflated values due to row 
+-- multiplication from joining before aggregating
+-- SELECT i.site, 
+--        SUM(i.biomass) AS total_biomass,
+--        SUM(b.count)   AS total_birds
+-- FROM invertebrates i
+-- JOIN shorebirds b ON i.site = b.site
+-- GROUP BY i.site
+-- ORDER BY total_biomass DESC;
