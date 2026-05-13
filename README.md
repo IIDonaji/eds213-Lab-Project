@@ -3,7 +3,7 @@
 ## Purpose
 This repository constructs a relational DuckDb database from a survey of 24 sandy beach sites in Santa Barbara and Ventura Counties (2017 -2018) to answer the question: 
 
-** Do sites with higher invertebrate biomass support greater shorebird abundance?** 
+**Do sites with higher invertebrate biomass support greater shorebird abundance?** 
 
 ## Repository Structure
 ```
@@ -19,6 +19,8 @@ This repository constructs a relational DuckDb database from a survey of 24 sand
 │   └── processed/
 │       ├── invertebrates_clean.csv
 │       └── shorebirds_clean.csv
+├── image/
+│      ├── scatterplot.png       
 ├── requirements.txt            # Python dependencies
 └── r_requirements.txt          # R dependencies
 ```
